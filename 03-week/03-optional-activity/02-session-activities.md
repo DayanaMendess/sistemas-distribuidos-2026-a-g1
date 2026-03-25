@@ -5,15 +5,18 @@
 Para el proyecto **Gestión de Citas Inteligentes**, se toma como microservicio principal el **Microservicio de Citas**.
 
 ### Recurso principal
+
 `/api/citas`
 
 ### Endpoints REST propuestos
 
 #### 1. Listar todas las citas
+
 **Método:** `GET`  
 **Endpoint:** `/api/citas`
 
 **Respuesta ejemplo:**
+
 ~~~json
 [
   {
@@ -36,10 +39,12 @@ Para el proyecto **Gestión de Citas Inteligentes**, se toma como microservicio 
 ~~~
 
 #### 2. Obtener una cita por ID
+
 **Método:** `GET`  
 **Endpoint:** `/api/citas/{id}`
 
 **Respuesta ejemplo:**
+
 ~~~json
 {
   "id": 1,
@@ -52,10 +57,12 @@ Para el proyecto **Gestión de Citas Inteligentes**, se toma como microservicio 
 ~~~
 
 #### 3. Crear una nueva cita
+
 **Método:** `POST`  
 **Endpoint:** `/api/citas`
 
 **Request ejemplo:**
+
 ~~~json
 {
   "usuarioId": 10,
@@ -66,6 +73,7 @@ Para el proyecto **Gestión de Citas Inteligentes**, se toma como microservicio 
 ~~~
 
 **Response ejemplo:**
+
 ~~~json
 {
   "id": 3,
@@ -78,10 +86,12 @@ Para el proyecto **Gestión de Citas Inteligentes**, se toma como microservicio 
 ~~~
 
 #### 4. Actualizar una cita
+
 **Método:** `PUT`  
 **Endpoint:** `/api/citas/{id}`
 
 **Request ejemplo:**
+
 ~~~json
 {
   "especialidad": "Medicina General",
@@ -92,6 +102,7 @@ Para el proyecto **Gestión de Citas Inteligentes**, se toma como microservicio 
 ~~~
 
 **Response ejemplo:**
+
 ~~~json
 {
   "id": 3,
@@ -104,10 +115,12 @@ Para el proyecto **Gestión de Citas Inteligentes**, se toma como microservicio 
 ~~~
 
 #### 5. Eliminar una cita
+
 **Método:** `DELETE`  
 **Endpoint:** `/api/citas/{id}`
 
 **Response ejemplo:**
+
 ~~~json
 {
   "mensaje": "Cita eliminada correctamente"
@@ -115,6 +128,7 @@ Para el proyecto **Gestión de Citas Inteligentes**, se toma como microservicio 
 ~~~
 
 ### Observación
+
 Estos endpoints cubren las operaciones CRUD básicas y sirven como base para documentar y construir el microservicio de citas.
 
 ---
@@ -124,12 +138,14 @@ Estos endpoints cubren las operaciones CRUD básicas y sirven como base para doc
 Para la arquitectura del proyecto se propone crear un **API Gateway** con Spring Boot.
 
 ### Configuración propuesta
+
 - **Proyecto:** Maven
 - **Lenguaje:** Java
 - **Versión Java:** 17
 - **Dependencia principal:** Spring Cloud Gateway
 
 ### Ubicación en el monorepo
+
 El proyecto del gateway debe quedar dentro de:
 
 ~~~text
@@ -137,6 +153,7 @@ gateway/
 ~~~
 
 ### Archivo de configuración inicial
+
 Se plantea una configuración simple en `application.yml` para enrutar solicitudes hacia el primer microservicio.
 
 ### Ejemplo de `application.yml`
@@ -156,10 +173,12 @@ spring:
 ~~~
 
 ### Explicación
+
 - El gateway escuchará en el puerto `8080`
 - Las solicitudes a `/api/citas/**` se redirigirán al microservicio de citas en `localhost:8081`
 
 ### Objetivo
+
 Centralizar la entrada al sistema para que el frontend no consuma directamente cada microservicio.
 
 ---
@@ -169,6 +188,7 @@ Centralizar la entrada al sistema para que el frontend no consuma directamente c
 Para validar la API propuesta, se plantea usar una herramienta de pruebas como **Postman** o **Thunder Client**.
 
 ### Colección de pruebas sugerida
+
 La colección debe contener los endpoints del microservicio de citas:
 
 - `GET /api/citas`
@@ -178,10 +198,12 @@ La colección debe contener los endpoints del microservicio de citas:
 - `DELETE /api/citas/{id}`
 
 ### Ejemplo de prueba de creación de cita
+
 **Método:** `POST`  
 **Endpoint:** `http://localhost:8080/api/citas`
 
 **Body ejemplo:**
+
 ~~~json
 {
   "usuarioId": 10,
@@ -192,6 +214,7 @@ La colección debe contener los endpoints del microservicio de citas:
 ~~~
 
 **Respuesta esperada:**
+
 ~~~json
 {
   "id": 4,
@@ -204,10 +227,12 @@ La colección debe contener los endpoints del microservicio de citas:
 ~~~
 
 ### Utilidad de la colección
+
 - validar que la API esté bien diseñada
 - probar request y response
 - documentar ejemplos reales de uso
 - servir como apoyo para el desarrollo del backend
 
-### Observación
+### Observacion
+
 El diseño del API Gateway y de los endpoints REST permite definir una base clara de integración entre frontend y backend, además de preparar la futura conexión entre microservicios.
