@@ -1,0 +1,21 @@
+services:
+  web:
+    image: nginx:latest
+    container_name: compose-web
+    ports:
+      - "8080:80"
+
+  db:
+    image: postgres:15
+    container_name: compose-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin1234
+      POSTGRES_DB: compose_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
